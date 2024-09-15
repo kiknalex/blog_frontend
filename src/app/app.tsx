@@ -1,13 +1,16 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import Footer from "@/widgets/footer/footer";
+import Header from "@/widgets/header/header";
+import { Outlet } from "react-router-dom";
 
 import "./App.css";
 
 function App() {
-	createRoot(document.querySelector("#root")!).render(
-		<StrictMode>
-			<></>
-		</StrictMode>
+	return (
+		<>
+			<Header></Header>
+			<Outlet></Outlet>
+			<Footer></Footer>
+		</>
 	);
 }
 export default App;
