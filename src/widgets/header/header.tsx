@@ -5,7 +5,7 @@ import Nav from "./nav/nav";
 
 const Header = () => {
 	return (
-		<header className="h-[85px] flex justify-between items-center container">
+		<header className="container flex h-[85px] items-center justify-between">
 			<a aria-label="Home" href="/">
 				<img alt="HotCoffee logo" src={logoUrl} />
 			</a>
