@@ -5,7 +5,7 @@ export default {
 		extend: {},
 		container: {
 			center: true,
-			inlinePadding: "20px",
+			padding: "20px",
 		},
 	},
 	plugins: [],
