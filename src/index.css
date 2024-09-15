@@ -554,12 +554,32 @@ video {
   --tw-contain-style:  ;
 }
 
+.block {
+  display: block;
+}
+
 .inline-block {
   display: inline-block;
 }
 
+.inline {
+  display: inline;
+}
+
+.h-6 {
+  height: 1.5rem;
+}
+
 .w-6 {
   width: 1.5rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.align-bottom {
+  vertical-align: bottom;
 }
 
 .text-5xl {

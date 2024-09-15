@@ -14,10 +14,14 @@ const SocLink = ({
 }) => {
 	const iconUrl = socMedia === "github" ? githubIconUrl : linkedinIconUrl;
 	return (
-		<a href={url} target={target}>
-			<span className={`${className} inline-block`}>
-				<img alt={`${socMedia} icon`} height="50" src={iconUrl} width="50" />
-			</span>
+		<a className="inline-block p-2" href={url} target={target}>
+			<img
+				alt={`${socMedia} icon`}
+				className={className}
+				height="50"
+				src={iconUrl}
+				width="50"
+			/>
 		</a>
 	);
 };
