@@ -1,5 +1,5 @@
 import Footer from "@/widgets/footer/footer";
-import Header from "@/widgets/header/header";
+import Header from "@/widgets/header";
 import { Outlet } from "react-router-dom";
 
 function App() {
