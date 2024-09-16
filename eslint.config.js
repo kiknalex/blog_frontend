@@ -79,6 +79,17 @@ export default tseslint.config(
 				},
 			],
 			"paths/alias": "error",
+			"perfectionist/sort-interfaces": [
+				"error",
+				{
+					groups: ["top", "unknown", "bottom"],
+					customGroups: {
+						top: "id",
+						bottom: "*Id",
+					},
+					groupKind: "required-first",
+				},
+			],
 		},
 	}
 );
