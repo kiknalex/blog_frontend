@@ -25,3 +25,10 @@ export interface PostDetailedType extends PostType {
 		username: string;
 	};
 }
+
+export interface PostByIdType extends PostType {
+	author: {
+		username: string;
+	};
+	comments: CommentType[];
+}

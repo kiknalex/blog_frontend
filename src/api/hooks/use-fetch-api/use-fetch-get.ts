@@ -1,12 +1,12 @@
 import {
 	CommentType,
+	PostByIdType,
 	PostDetailedType,
-	PostType,
 	UserType,
 } from "@/api/types/api-data";
 import {
 	GetAllPosts,
-	GetPost,
+	GetPostById,
 	GetPostComments,
 	GetUsers,
 } from "@/api/types/fetch";
@@ -27,10 +27,10 @@ const useFetchGet = () => {
 			setLoading(false);
 		}
 	}, [get]);
-	const getPost: GetPost = useCallback(
+	const getPost: GetPostById = useCallback(
 		async (postId: number) => {
 			try {
-				return (await get(`/posts/${postId}`)) as PostType;
+				return (await get(`/posts/${postId}`)) as PostByIdType;
 			} catch (error) {
 				console.error(error);
 			} finally {

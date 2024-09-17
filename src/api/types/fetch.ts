@@ -1,4 +1,9 @@
-import { CommentType, PostDetailedType, PostType, UserType } from "./api-data";
+import {
+	CommentType,
+	PostByIdType,
+	PostDetailedType,
+	UserType,
+} from "./api-data";
 
 export type GetRequest = (url: string) => Promise<unknown>;
 export type PostRequest = (
@@ -18,7 +23,7 @@ export type DeleteRequest = (
 ) => Promise<unknown>;
 
 export type GetAllPosts = () => Promise<PostDetailedType[] | undefined>;
-export type GetPost = (postId: number) => Promise<PostType | undefined>;
+export type GetPostById = (postId: number) => Promise<PostByIdType | undefined>;
 export type GetPostComments = (
 	postId: number
 ) => Promise<CommentType[] | undefined>;
