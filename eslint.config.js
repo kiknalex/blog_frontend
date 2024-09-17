@@ -103,6 +103,24 @@ export default tseslint.config(
 					groups: ["unknown", "nullish"],
 				},
 			],
+			"perfectionist/sort-jsx-props": [
+				"error",
+				{
+					groups: ["top", "unknown", "bottom"],
+					customGroups: {
+						top: "id",
+						bottom: "key",
+					},
+				},
+			],
+			"unicorn/prevent-abbreviations": [
+				"error",
+				{
+					replacements: {
+						props: false,
+					},
+				},
+			],
 		},
 	}
 );
