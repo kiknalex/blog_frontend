@@ -6,21 +6,22 @@ export interface User {
 export interface Post {
 	id: number;
 	content: string;
-	date_posted: Date;
+	date_posted: string;
 	published: boolean;
 	title: string;
 }
 export interface Comment {
 	id: number;
 	content: string;
-	date_posted: Date;
+	date_posted: string;
 	authorId: number;
 	postId: number;
 }
-export interface PostDetailed {
+export interface PostDetailed extends Post {
+	_count: {
+		comments: number;
+	};
 	author: {
 		username: string;
 	};
-	comments: Comment[];
-	post: Post;
 }
