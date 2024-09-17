@@ -33,7 +33,7 @@ const Post = ({
 				{content}...
 			</p>
 			<p className="mt-4 text-slate-800">
-				By <strong>{author}</strong>
+				By <b>{author}</b>
 			</p>
 			<p className="text-slate-600">Comments: {commentsCount}</p>
 			<div className="flex justify-between">
