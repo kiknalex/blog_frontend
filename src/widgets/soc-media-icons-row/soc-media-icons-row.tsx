@@ -4,12 +4,12 @@ const SocMediaIconsRow = () => {
 	return (
 		<div className="flex items-center gap-2">
 			<SocLink
-				className="w-6"
+				className="text-2xl"
 				socMedia="github"
 				url="https://github.com/kiknalex/blog_frontend"
 			/>
 			<SocLink
-				className="w-6"
+				className="text-2xl"
 				socMedia="linkedin"
 				url="https://www.linkedin.com/in/aleksandre-kiknadze-a94272221/"
 			/>

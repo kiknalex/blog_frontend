@@ -1,6 +1,3 @@
-import githubIconUrl from "@assets/github-brands-solid.svg";
-import linkedinIconUrl from "@assets/linkedin-brands-solid.svg";
-
 const SocLink = ({
 	className,
 	socMedia,
@@ -10,7 +7,12 @@ const SocLink = ({
 	socMedia: "github" | "linkedin";
 	url: string;
 }) => {
-	const iconUrl = socMedia === "github" ? githubIconUrl : linkedinIconUrl;
+	const iconUrl =
+		socMedia === "github" ? (
+			<i className="fa-brands fa-square-github"></i>
+		) : (
+			<i className="fa-brands fa-linkedin"></i>
+		);
 	return (
 		<a
 			className="inline-block p-2"
@@ -18,13 +20,7 @@ const SocLink = ({
 			rel="noopener noreferrer"
 			target="_blank"
 		>
-			<img
-				alt={`${socMedia} icon`}
-				className={className}
-				height="50"
-				src={iconUrl}
-				width="50"
-			/>
+			<span className={`${className} hover:text-yellow-500`}>{iconUrl}</span>
 		</a>
 	);
 };

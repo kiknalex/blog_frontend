@@ -7,8 +7,7 @@ import PostSkeleton from "./post/post-skeleton";
 
 const PostsList = () => {
 	const [postsData, setPostsData] = useState<PostDetailed[]>([]);
-	const { getAllPosts } = useFetchGet();
-	const loading = true;
+	const { getAllPosts, loading } = useFetchGet();
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -26,7 +25,9 @@ const PostsList = () => {
 	return (
 		<section className="container mb-4 mt-12 grid grid-cols-3 gap-4">
 			{loading
-				? Array.from({ length: 6 }).map(() => <PostSkeleton />)
+				? Array.from({ length: 3 }).map((element, index) => (
+						<PostSkeleton key={index} />
+					))
 				: postsData.map((post) => {
 						return (
 							<Post
