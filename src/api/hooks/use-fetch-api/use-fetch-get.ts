@@ -1,4 +1,9 @@
-import { Post, PostDetailed, User } from "@/api/types/api-data";
+import {
+	CommentType,
+	PostDetailedType,
+	PostType,
+	UserType,
+} from "@/api/types/api-data";
 import {
 	GetAllPosts,
 	GetPost,
@@ -7,15 +12,15 @@ import {
 } from "@/api/types/fetch";
 import { useCallback, useState } from "react";
 
-import fetchWrapped from "../../utils/fetchWrapped";
+import fetchWrapped from "../../utils/fetch-wrapped";
 
-const useFetchApi = () => {
+const useFetchGet = () => {
 	const [loading, setLoading] = useState(true);
 	const { get } = fetchWrapped();
 
 	const getAllPosts: GetAllPosts = useCallback(async () => {
 		try {
-			return (await get("/posts")) as PostDetailed[];
+			return (await get("/posts")) as PostDetailedType[];
 		} catch (error) {
 			console.error(error);
 		} finally {
@@ -25,9 +30,11 @@ const useFetchApi = () => {
 	const getPost: GetPost = useCallback(
 		async (postId: number) => {
 			try {
-				return (await get(`/posts/${postId}`)) as Post;
+				return (await get(`/posts/${postId}`)) as PostType;
 			} catch (error) {
 				console.error(error);
+			} finally {
+				setLoading(false);
 			}
 		},
 		[get]
@@ -35,18 +42,22 @@ const useFetchApi = () => {
 	const getPostComments: GetPostComments = useCallback(
 		async (postId: number) => {
 			try {
-				return (await get(`/posts/${postId}/comments`)) as Comment[];
+				return (await get(`/posts/${postId}/comments`)) as CommentType[];
 			} catch (error) {
 				console.error(error);
+			} finally {
+				setLoading(false);
 			}
 		},
 		[get]
 	);
 	const getUsers: GetUsers = useCallback(async () => {
 		try {
-			return (await get("/users")) as User[];
+			return (await get("/users")) as UserType[];
 		} catch (error) {
 			console.error(error);
+		} finally {
+			setLoading(false);
 		}
 	}, [get]);
 	return {
@@ -59,4 +70,4 @@ const useFetchApi = () => {
 	};
 };
 
-export default useFetchApi;
+export default useFetchGet;
