@@ -1,5 +1,5 @@
+import { dateFormatter } from "@/utils/date-formatter";
 import { Link } from "react-router-dom";
-
 interface PostCardPropsType {
 	id: number;
 	author: string;
@@ -8,12 +8,6 @@ interface PostCardPropsType {
 	date: string;
 	title: string;
 }
-
-const dateFormatter = new Intl.DateTimeFormat("en-US", {
-	day: "numeric",
-	month: "short",
-	year: "numeric",
-});
 
 const PostCard = ({
 	author,
