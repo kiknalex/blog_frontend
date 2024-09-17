@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 
 import {
 	DeleteRequest,
@@ -7,29 +7,22 @@ import {
 	PutRequest,
 } from "../types/fetch";
 
-const useFetch = (baseUrl = import.meta.env.VITE_API_URL) => {
-	const [loading, setLoading] = useState(true);
-	const get: GetRequest = useCallback(
-		(url: string) => {
-			return new Promise((resolve, reject) => {
-				fetch(baseUrl + url)
-					.then((response) => response.json())
-					.then((data) => {
-						if (!data) {
-							setLoading(false);
-							return reject(data);
-						}
-						setLoading(false);
-						return resolve(data);
-					})
-					.catch((error) => {
-						setLoading(false);
-						reject(error);
-					});
-			});
-		},
-		[baseUrl]
-	);
+const fetchWrapped = (baseUrl = import.meta.env.VITE_API_URL) => {
+	const get: GetRequest = (url: string) => {
+		return new Promise((resolve, reject) => {
+			fetch(baseUrl + url)
+				.then((response) => response.json())
+				.then((data) => {
+					if (!data) {
+						return reject(data);
+					}
+					return resolve(data);
+				})
+				.catch((error) => {
+					reject(error);
+				});
+		});
+	};
 
 	const post: PostRequest = useCallback(
 		(url, body, token) => {
@@ -45,14 +38,11 @@ const useFetch = (baseUrl = import.meta.env.VITE_API_URL) => {
 					.then((response) => response.json())
 					.then((data) => {
 						if (!data) {
-							setLoading(false);
 							return reject(data);
 						}
-						setLoading(false);
 						return resolve(data);
 					})
 					.catch((error) => {
-						setLoading(false);
 						reject(error);
 					});
 			});
@@ -72,14 +62,11 @@ const useFetch = (baseUrl = import.meta.env.VITE_API_URL) => {
 					.then((response) => response.json())
 					.then((data) => {
 						if (!data) {
-							setLoading(false);
 							return reject(data);
 						}
-						setLoading(false);
 						return resolve(data);
 					})
 					.catch((error) => {
-						setLoading(false);
 						reject(error);
 					});
 			});
@@ -99,14 +86,11 @@ const useFetch = (baseUrl = import.meta.env.VITE_API_URL) => {
 					.then((response) => response.json())
 					.then((data) => {
 						if (!data) {
-							setLoading(false);
 							return reject(data);
 						}
-						setLoading(false);
 						return resolve(data);
 					})
 					.catch((error) => {
-						setLoading(false);
 						reject(error);
 					});
 			});
@@ -119,8 +103,7 @@ const useFetch = (baseUrl = import.meta.env.VITE_API_URL) => {
 		get,
 		post,
 		put,
-
-		loading,
 	};
 };
-export default useFetch;
+
+export default fetchWrapped;

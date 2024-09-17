@@ -5,22 +5,21 @@ import {
 	GetPostComments,
 	GetUsers,
 } from "@/api/types/fetch";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
-import useFetch from "../use-fetch";
+import fetchWrapped from "../../utils/fetchWrapped";
 
 const useFetchApi = () => {
-	const {
-		get,
-
-		loading,
-	} = useFetch();
+	const [loading, setLoading] = useState(true);
+	const { get } = fetchWrapped();
 
 	const getAllPosts: GetAllPosts = useCallback(async () => {
 		try {
 			return (await get("/posts")) as PostDetailed[];
 		} catch (error) {
 			console.error(error);
+		} finally {
+			setLoading(false);
 		}
 	}, [get]);
 	const getPost: GetPost = useCallback(
