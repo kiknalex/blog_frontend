@@ -90,6 +90,19 @@ export default tseslint.config(
 					groupKind: "required-first",
 				},
 			],
+			"perfectionist/sort-objects": [
+				"error",
+				{
+					partitionByNewLine: true,
+				},
+			],
+			"perfectionist/sort-union-types": [
+				"error",
+				{
+					ignoreCase: true,
+					groups: ["unknown", "nullish"],
+				},
+			],
 		},
 	}
 );
