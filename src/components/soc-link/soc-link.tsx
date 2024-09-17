@@ -15,12 +15,14 @@ const SocLink = ({
 		);
 	return (
 		<a
-			className="inline-block p-2"
+			className="inline-block"
 			href={url}
 			rel="noopener noreferrer"
 			target="_blank"
 		>
-			<span className={`${className} hover:text-yellow-500`}>{iconUrl}</span>
+			<span className={`${className} p-2 hover:text-yellow-500`}>
+				{iconUrl}
+			</span>
 		</a>
 	);
 };
