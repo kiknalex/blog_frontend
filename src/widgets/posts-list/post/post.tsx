@@ -37,7 +37,9 @@ const Post = ({
 			</p>
 			<p className="text-slate-600">Comments: {commentsCount}</p>
 			<div className="flex justify-between">
-				<time className="text-slate-600">{formattedDate}</time>
+				<time className="text-slate-600" dateTime={date}>
+					{formattedDate}
+				</time>
 				<Link
 					className="text-slate-600 hover:text-yellow-500"
 					to={`/posts/${id}`}
