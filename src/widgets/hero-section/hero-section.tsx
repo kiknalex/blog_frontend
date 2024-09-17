@@ -3,7 +3,7 @@ import heroImgUrl from "@assets/hero-section-img.png";
 const HeroSection = () => {
 	return (
 		<section className="h-[calc(100vh-85px)] bg-gray-100">
-			<div className="container flex h-full -translate-y-10 items-center justify-center px-24">
+			<div className="container flex h-full items-center justify-center px-24 pb-24">
 				<div className="flex max-w-[600px] flex-col gap-4">
 					<h1 className="break-words text-6xl font-bold">
 						Welcome to my full&#x2011;stack blog website.
