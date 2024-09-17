@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.animate-skeleton {
+	background: linear-gradient(110deg, #e2e2e2 8%, #eeeeee 18%, #e2e2e2 33%);
+	animation: leftToRight 1.5s infinite linear;
+	background-size: 200%;
+}
+
+@keyframes leftToRight {
+	to {
+		background-position-x: -200%;
+	}
+}
