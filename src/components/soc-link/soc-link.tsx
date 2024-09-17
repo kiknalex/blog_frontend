@@ -9,9 +9,9 @@ const SocLink = ({
 }) => {
 	const iconUrl =
 		socMedia === "github" ? (
-			<i className="fa-brands fa-square-github"></i>
+			<i className="fa-brands fa-square-github"></i> // eslint-disable-line tailwindcss/no-custom-classname
 		) : (
-			<i className="fa-brands fa-linkedin"></i>
+			<i className="fa-brands fa-linkedin"></i> // eslint-disable-line tailwindcss/no-custom-classname
 		);
 	return (
 		<a
