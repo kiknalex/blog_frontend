@@ -2,8 +2,8 @@ import useFetchGet from "@/api/hooks/use-fetch-api/use-fetch-get";
 import { PostDetailed } from "@/api/types/api-data";
 import { useEffect, useState } from "react";
 
-import Post from "./post/post";
-import PostSkeleton from "./post/post-skeleton";
+import PostCard from "./post-card/post-card";
+import PostCardSkeleton from "./post-card/post-card-skeleton";
 
 const PostsList = () => {
 	const [postsData, setPostsData] = useState<PostDetailed[]>([]);
@@ -25,12 +25,10 @@ const PostsList = () => {
 	return (
 		<section className="container mb-4 mt-12 grid grid-cols-3 gap-4">
 			{loading
-				? Array.from({ length: 3 }).map((element, index) => (
-						<PostSkeleton key={index} />
-					))
+				? Array.from({ length: 3 }).map(() => <PostCardSkeleton />) // eslint-disable-line react/jsx-key
 				: postsData.map((post) => {
 						return (
-							<Post
+							<PostCard
 								id={post.id}
 								author={post.author.username}
 								commentsCount={post._count.comments}

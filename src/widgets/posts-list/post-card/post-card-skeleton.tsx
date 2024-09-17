@@ -1,4 +1,4 @@
-const PostSkeleton = () => {
+const PostCardSkeleton = () => {
 	return (
 		<div className="flex flex-col rounded p-8 shadow-lg">
 			<div className="animate-skeleton h-6 w-3/4 bg-gray-300"></div>
@@ -14,4 +14,4 @@ const PostSkeleton = () => {
 	);
 };
 
-export default PostSkeleton;
+export default PostCardSkeleton;

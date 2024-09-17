@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-interface PostPropsType {
+interface PostCardPropsType {
 	id: number;
 	author: string;
 	commentsCount: number;
@@ -15,14 +15,14 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
 	year: "numeric",
 });
 
-const Post = ({
+const PostCard = ({
 	author,
 	commentsCount,
 	content,
 	date,
 	id,
 	title,
-}: PostPropsType) => {
+}: PostCardPropsType) => {
 	const formattedDate = dateFormatter.format(new Date(date));
 	return (
 		<div className="flex flex-col rounded p-8 shadow-lg">
@@ -51,4 +51,4 @@ const Post = ({
 	);
 };
 
-export default Post;
+export default PostCard;
