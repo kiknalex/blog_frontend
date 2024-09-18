@@ -30,7 +30,7 @@ const PostPage = () => {
 		fetchData();
 	}, [getPost, postId, navigate]);
 	return (
-		<main className="">
+		<article className="container mt-12 w-auto max-w-5xl">
 			{data && loading !== true ? (
 				<Post
 					author={data.author.username}
@@ -42,7 +42,7 @@ const PostPage = () => {
 				<PostSkeleton />
 			)}
 			<div>comments</div>
-		</main>
+		</article>
 	);
 };
 export default PostPage;

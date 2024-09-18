@@ -9,7 +9,7 @@ interface PostPropsType {
 
 const Post = ({ author, content, date, title }: PostPropsType) => {
 	return (
-		<article className="container mt-12 w-auto max-w-5xl">
+		<>
 			<h1 className="text-5xl font-bold text-gray-800">{title}</h1>
 			<div className="mt-4 flex gap-4">
 				<address className="font-semibold not-italic">
@@ -19,7 +19,7 @@ const Post = ({ author, content, date, title }: PostPropsType) => {
 			</div>
 			<hr className="my-8" />
 			<p className="mt-4">{content}</p>
-		</article>
+		</>
 	);
 };
 
