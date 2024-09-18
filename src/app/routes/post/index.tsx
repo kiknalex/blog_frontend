@@ -30,7 +30,7 @@ const PostPage = () => {
 		fetchData();
 	}, [getPost, postId, navigate]);
 	return (
-		<article className="container mt-12 w-auto max-w-5xl">
+		<article className="container mt-12 h-auto max-w-5xl">
 			{data && loading !== true ? (
 				<Post
 					author={data.author.username}

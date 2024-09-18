@@ -1,6 +1,6 @@
 const PostSkeleton = () => {
 	return (
-		<div className="container mt-12 w-auto max-w-5xl">
+		<div className="container mt-12 min-w-full max-w-5xl">
 			<div className="animate-skeleton h-12 bg-gray-300"></div>
 			<div className="flex gap-4">
 				<div className="animate-skeleton mt-4 h-4 w-20 bg-gray-300"></div>

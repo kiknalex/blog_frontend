@@ -2,7 +2,7 @@ import SocMediaIconsRow from "../soc-media-icons-row/soc-media-icons-row";
 
 const Footer = () => {
 	return (
-		<footer className=" flex h-20 items-center divide-gray-300 border-t-2 border-solid">
+		<footer className="mt-auto flex h-20 items-center divide-gray-300 border-t-2 border-solid">
 			<div className="container flex items-center justify-between">
 				<div>
 					<p className="font-bold">
