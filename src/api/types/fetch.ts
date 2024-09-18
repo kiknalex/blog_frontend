@@ -5,26 +5,27 @@ import {
 	UserType,
 } from "./api-data";
 
-export type GetRequest = (url: string) => Promise<unknown>;
-export type PostRequest = (
-	url: string,
-	body: Body,
-	token?: string
-) => Promise<unknown>;
-export type PutRequest = (
-	url: string,
-	body: Body,
-	token?: string
-) => Promise<unknown>;
-export type DeleteRequest = (
-	url: string,
-	body: Body,
-	token?: string
-) => Promise<unknown>;
+export type HttpMethod = "get" | "post" | "put" | "delete";
 
-export type GetAllPosts = () => Promise<PostDetailedType[] | undefined>;
-export type GetPostById = (postId: number) => Promise<PostByIdType | undefined>;
-export type GetPostComments = (
+export type UseFetchType<T> = (
+	endpoint: string,
+	body?: object | string,
+	headers?: object,
+	method?: HttpMethod,
+	baseUrl?: string
+) => UseFetchResponseType<T>;
+
+export type UseFetchResponseType<T> = [
+	data: T,
+	loading: boolean,
+	error: Error | undefined,
+];
+
+export type GetAllPostsType = PostDetailedType[] | undefined;
+export type GetPostByIdType = (
+	postId: number
+) => Promise<PostByIdType | undefined>;
+export type GetPostCommentsType = (
 	postId: number
 ) => Promise<CommentType[] | undefined>;
-export type GetUsers = () => Promise<UserType[] | undefined>;
+export type GetUsersType = () => Promise<UserType[] | undefined>;

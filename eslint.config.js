@@ -113,6 +113,7 @@ export default tseslint.config(
 					},
 				},
 			],
+			"perfectionist/sort-union-types": "off",
 			"unicorn/prevent-abbreviations": [
 				"error",
 				{

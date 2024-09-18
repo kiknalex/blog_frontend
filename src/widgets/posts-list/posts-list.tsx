@@ -1,31 +1,23 @@
-import useFetchGet from "@/api/hooks/use-fetch-api/use-fetch-get";
-import { PostDetailedType } from "@/api/types/api-data";
-import { useEffect, useState } from "react";
+import { useGetPosts } from "@/api/hooks/use-fetch-api/use-fetch-api";
+import { useState } from "react";
 
 import PostCard from "./post-card/post-card";
 import PostCardSkeleton from "./post-card/post-card-skeleton";
 
 const PostsList = () => {
-	const [postsData, setPostsData] = useState<PostDetailedType[] | undefined>(
-		undefined
-	);
-	const { getAllPosts, loading } = useFetchGet();
+	const [count, setCount] = useState(0);
+	const [postsData, loading, error] = useGetPosts();
 
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const data = await getAllPosts();
-				if (data) {
-					setPostsData(data);
-				}
-			} catch (error) {
-				console.error(error);
-			}
-		};
-		fetchData();
-	}, [getAllPosts]);
+	if (error) {
+		console.error(error);
+	}
+	const handleCountClick = () => {
+		console.log(postsData);
+		setCount(count + 1);
+	};
 	return (
 		<section className="container mb-4 mt-12 grid grid-cols-3 gap-4">
+			<button onClick={handleCountClick}></button>
 			{
 				postsData && !loading
 					? postsData.map((post) => {
