@@ -6,11 +6,13 @@ import {
 
 import App from "./app";
 import HomePage from "./routes/home";
+import PostPage from "./routes/post";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Route element={<App />}>
 			<Route element={<HomePage />} path="/" />
+			<Route element={<PostPage />} path="/posts/:postId" />
 		</Route>
 	)
 );
