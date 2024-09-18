@@ -48,6 +48,3 @@ const PostsList = () => {
 };
 
 export default PostsList;
-
-/* {Array.from({ length: 5 }).map((el) => (
-				<PostSkeleton /> */
