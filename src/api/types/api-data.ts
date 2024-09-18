@@ -12,6 +12,9 @@ export interface PostType {
 }
 export interface CommentType {
 	id: number;
+	author: {
+		username: string;
+	};
 	content: string;
 	date_posted: string;
 	authorId: number;
