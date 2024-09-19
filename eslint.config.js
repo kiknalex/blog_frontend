@@ -120,6 +120,7 @@ export default tseslint.config(
 				{
 					replacements: {
 						props: false,
+						ref: false,
 					},
 				},
 			],
