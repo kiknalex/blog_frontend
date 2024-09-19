@@ -12,7 +12,6 @@ const useScroll = (
 			};
 			const observerCallback = (entries: IntersectionObserverEntry[]) => {
 				if (entries[0].isIntersecting) {
-					console.log("test");
 					callback();
 				}
 			};

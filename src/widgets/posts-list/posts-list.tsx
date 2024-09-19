@@ -9,7 +9,6 @@ const PostsList = () => {
 	if (error) {
 		console.error(error);
 	}
-	console.log(postsData);
 	return (
 		<section className="container mb-4 mt-12 grid grid-cols-3 gap-4">
 			{
