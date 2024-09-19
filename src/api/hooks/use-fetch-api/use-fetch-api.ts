@@ -6,7 +6,7 @@ import {
 	UseFetchResponseType,
 } from "@/api/types/fetch";
 
-import useFetch from "../../utils/use-fetch";
+import useFetch from "../use-fetch";
 
 export const useGetPosts = (): UseFetchResponseType<GetAllPostsType> =>
 	useFetch("/posts");
@@ -16,9 +16,22 @@ export const useGetPost = (
 ): UseFetchResponseType<GetPostByIdType> => useFetch(`/posts/${postId}`);
 
 export const useGetPostComments = (
-	postId: string
-): UseFetchResponseType<GetPostCommentsType> =>
-	useFetch(`/posts/${postId}/comments`);
+	postId: string,
+	limit?: number,
+	page?: number
+): UseFetchResponseType<GetPostCommentsType> => {
+	let query = "?";
+	if (limit) {
+		query += `limit=${limit}&`;
+	}
+	if (page) {
+		query += `page=${page}&`;
+	}
+	if (query.length === 1) {
+		query = "";
+	}
+	return useFetch(`/posts/${postId}/comments` + query);
+};
 
 export const useGetUsers = (): UseFetchResponseType<GetUsersType> =>
 	useFetch(`/users`);

@@ -1,26 +1,20 @@
 import { useGetPosts } from "@/api/hooks/use-fetch-api/use-fetch-api";
-import { useState } from "react";
 
 import PostCard from "./post-card/post-card";
 import PostCardSkeleton from "./post-card/post-card-skeleton";
 
 const PostsList = () => {
-	const [count, setCount] = useState(0);
 	const [postsData, loading, error] = useGetPosts();
 
 	if (error) {
 		console.error(error);
 	}
-	const handleCountClick = () => {
-		console.log(postsData);
-		setCount(count + 1);
-	};
+	console.log(postsData);
 	return (
 		<section className="container mb-4 mt-12 grid grid-cols-3 gap-4">
-			<button onClick={handleCountClick}></button>
 			{
 				postsData && !loading
-					? postsData.map((post) => {
+					? postsData.posts.map((post) => {
 							return (
 								<PostCard
 									id={post.id}
