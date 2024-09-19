@@ -34,6 +34,9 @@ export interface PostByIdType extends PostType {
 		username: string;
 	};
 	comments: CommentType[];
+	_count: {
+		comments: number;
+	};
 }
 
 export interface PostsType {
