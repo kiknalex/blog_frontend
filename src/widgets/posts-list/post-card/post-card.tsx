@@ -19,7 +19,7 @@ const PostCard = ({
 }: PostCardPropsType) => {
 	const formattedDate = dateFormatter.format(new Date(date));
 	return (
-		<div className="flex flex-col rounded p-8 shadow-lg">
+		<div className="flex h-min flex-col rounded p-8 shadow-lg">
 			<h2 className="text-3xl font-semibold hover:text-yellow-500">
 				<Link to={`/posts/${id}`}>{title}</Link>
 			</h2>

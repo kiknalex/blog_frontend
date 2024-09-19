@@ -8,9 +8,22 @@ import {
 
 import useFetch from "../use-fetch";
 
-export const useGetPosts = (): UseFetchResponseType<GetAllPostsType> =>
-	useFetch("/posts");
-
+export const useGetPosts = (
+	limit?: number,
+	page?: number
+): UseFetchResponseType<GetAllPostsType> => {
+	let query = "?";
+	if (limit) {
+		query += `limit=${limit}&`;
+	}
+	if (page) {
+		query += `page=${page}&`;
+	}
+	if (query.length === 1) {
+		query = "";
+	}
+	return useFetch("/posts" + query);
+};
 export const useGetPost = (
 	postId: string
 ): UseFetchResponseType<GetPostByIdType> => useFetch(`/posts/${postId}`);
