@@ -114,6 +114,7 @@ export default tseslint.config(
 				},
 			],
 			"perfectionist/sort-union-types": "off",
+			"perfectionist/sort-interfaces": "off",
 			"unicorn/prevent-abbreviations": [
 				"error",
 				{

@@ -35,3 +35,18 @@ export interface PostByIdType extends PostType {
 	};
 	comments: CommentType[];
 }
+
+export interface PostsType {
+	posts: PostDetailedType[];
+	meta: MetaType;
+}
+export interface CommentsType {
+	comments: CommentType[];
+	meta: MetaType;
+}
+
+interface MetaType {
+	totalCount: number;
+	currentPage: number;
+	nextPage: number | null;
+}

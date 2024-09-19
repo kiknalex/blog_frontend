@@ -1,9 +1,4 @@
-import {
-	CommentType,
-	PostByIdType,
-	PostDetailedType,
-	UserType,
-} from "./api-data";
+import { CommentsType, PostByIdType, PostsType, UserType } from "./api-data";
 
 export type HttpMethod = "get" | "post" | "put" | "delete";
 
@@ -16,16 +11,12 @@ export type UseFetchType<T> = (
 ) => UseFetchResponseType<T>;
 
 export type UseFetchResponseType<T> = [
-	data: T,
+	data: T | undefined,
 	loading: boolean,
 	error: Error | undefined,
 ];
 
-export type GetAllPostsType = PostDetailedType[] | undefined;
-export type GetPostByIdType = (
-	postId: number
-) => Promise<PostByIdType | undefined>;
-export type GetPostCommentsType = (
-	postId: number
-) => Promise<CommentType[] | undefined>;
-export type GetUsersType = () => Promise<UserType[] | undefined>;
+export type GetAllPostsType = PostsType | undefined;
+export type GetPostByIdType = PostByIdType | undefined;
+export type GetPostCommentsType = CommentsType | undefined;
+export type GetUsersType = UserType[] | undefined;
