@@ -90,12 +90,7 @@ export default tseslint.config(
 					groupKind: "required-first",
 				},
 			],
-			"perfectionist/sort-objects": [
-				"error",
-				{
-					partitionByNewLine: true,
-				},
-			],
+			"perfectionist/sort-objects": "off",
 			"perfectionist/sort-union-types": [
 				"error",
 				{
