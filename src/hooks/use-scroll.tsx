@@ -2,7 +2,7 @@ import { useCallback } from "react";
 
 const useScroll = (callback: VoidFunction) => {
 	const sentinelRef = useCallback(
-		(targetRef: HTMLDivElement) => {
+		(sentinelRef: HTMLDivElement) => {
 			const options = {
 				rootMargin: "500px 0px 400px 0px",
 				threshold: 0,
@@ -13,8 +13,8 @@ const useScroll = (callback: VoidFunction) => {
 				}
 			};
 			const observer = new IntersectionObserver(observerCallback, options);
-			if (targetRef) {
-				observer.observe(targetRef);
+			if (sentinelRef) {
+				observer.observe(sentinelRef);
 			} else {
 				observer.disconnect();
 			}
