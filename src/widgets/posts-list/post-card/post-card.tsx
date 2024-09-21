@@ -1,6 +1,7 @@
 import { dateFormatter } from "@/utils/date-formatter";
+import { FunctionComponent } from "react";
 import { Link } from "react-router-dom";
-interface PostCardPropsType {
+interface Props {
 	id: number;
 	author: string;
 	commentsCount: number;
@@ -9,14 +10,14 @@ interface PostCardPropsType {
 	title: string;
 }
 
-const PostCard = ({
+const PostCard: FunctionComponent<Props> = ({
 	author,
 	commentsCount,
 	content,
 	date,
 	id,
 	title,
-}: PostCardPropsType) => {
+}) => {
 	const formattedDate = dateFormatter.format(new Date(date));
 	return (
 		<div className="flex h-min flex-col rounded p-8 shadow-lg">

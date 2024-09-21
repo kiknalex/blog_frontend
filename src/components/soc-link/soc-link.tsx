@@ -1,12 +1,12 @@
-const SocLink = ({
-	className,
-	socMedia,
-	url,
-}: {
+import { FunctionComponent } from "react";
+
+interface Props {
 	className: string;
 	socMedia: "github" | "linkedin";
 	url: string;
-}) => {
+}
+
+const SocLink: FunctionComponent<Props> = ({ className, socMedia, url }) => {
 	const iconUrl =
 		socMedia === "github" ? (
 			<i className="fa-brands fa-square-github"></i> // eslint-disable-line tailwindcss/no-custom-classname

@@ -1,21 +1,22 @@
 import { fetchOnScrollComments } from "@/api/services/comments-list/fetch";
 import { CommentsType, CommentType } from "@/api/types/api-data";
 import LoadingSpinner from "@/components/loading-spinner/loading-spinner";
+import AddComment from "@/features/add-comment/add-comment";
 import useScroll from "@/hooks/use-scroll";
-import { useCallback, useState } from "react";
+import { FunctionComponent, useCallback, useState } from "react";
 
 import Comment from "./comment/comment";
 
-const limit = 6;
-
-const CommentsList = ({
-	initialComments,
-	postId,
-	totalComments,
-}: {
+interface Props {
 	initialComments: CommentType[];
 	postId: string;
 	totalComments: number;
+}
+const limit = 6;
+const CommentsList: FunctionComponent<Props> = ({
+	initialComments,
+	postId,
+	totalComments,
 }) => {
 	const [commentsData, setCommentsData] = useState<
 		{ comments: CommentType[] } | CommentsType | undefined
@@ -55,6 +56,7 @@ const CommentsList = ({
 			<h1 className="text-2xl">
 				Comments <span>({totalComments})</span>
 			</h1>
+			<AddComment />
 			{commentsData?.comments &&
 				commentsData.comments.map((comment) => {
 					return (

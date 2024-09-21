@@ -1,8 +1,10 @@
-interface LoadingSpinnerProperties {
+import { FunctionComponent } from "react";
+
+interface Props {
 	sizePx?: string;
 }
 
-const LoadingSpinner = ({ sizePx = "32px" }: LoadingSpinnerProperties) => {
+const LoadingSpinner: FunctionComponent<Props> = ({ sizePx = "32px" }) => {
 	return (
 		<div className="text-center" role="status">
 			<svg

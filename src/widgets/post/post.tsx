@@ -1,13 +1,14 @@
 import { dateFormatter } from "@/utils/date-formatter";
+import { FunctionComponent } from "react";
 
-interface PostPropsType {
+interface Props {
 	author: string;
 	content: string;
 	date: string;
 	title: string;
 }
 
-const Post = ({ author, content, date, title }: PostPropsType) => {
+const Post: FunctionComponent<Props> = ({ author, content, date, title }) => {
 	return (
 		<>
 			<h1 className="text-5xl font-bold text-gray-800">{title}</h1>
