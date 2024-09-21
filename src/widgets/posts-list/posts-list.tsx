@@ -1,66 +1,93 @@
-import { useGetPosts } from "@/api/hooks/use-fetch-api/use-fetch-api";
-import { PostsType } from "@/api/types/api-data";
+import {
+	fetchInitialPosts,
+	fetchOnScrollPosts,
+} from "@/api/services/posts-list/fetch";
+import { GetAllPostsType } from "@/api/types/fetch";
 import useScroll from "@/hooks/use-scroll";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import PostCard from "./post-card/post-card";
 import PostCardSkeleton from "./post-card/post-card-skeleton";
 
+const limit = 3;
 const PostsList = () => {
-	const [posts, setPosts] = useState<PostsType | undefined>(undefined);
-	const [page, setPage] = useState<number>(1);
-	const [postsData, loading, error] = useGetPosts(3, page);
-	const scrollLoadRef = useRef<HTMLDivElement>(null);
-	const loadMorePosts = () => {
-		if (!loading && postsData?.meta.nextPage) {
-			setPage((p) => p + 1);
+	const [posts, setPosts] = useState<GetAllPostsType | undefined>(undefined);
+	const [hasNextPage, setHasNextPage] = useState<boolean>(true);
+	const [loading, setLoading] = useState<boolean>(false);
+	const [page, setPage] = useState<number>(2);
+	const fetchOnScroll = useCallback(async () => {
+		if (loading && !hasNextPage) return;
+
+		try {
+			setLoading(true);
+			const data = await fetchOnScrollPosts(limit, page);
+			if (data) {
+				setPosts((prevPosts) => {
+					return {
+						meta: data.meta,
+						posts: [...(prevPosts?.posts ?? []), ...data.posts],
+					};
+				});
+				if (data.meta.nextPage) {
+					setPage((p) => p + 1);
+				} else {
+					setHasNextPage(false);
+				}
+			}
+		} catch (error) {
+			console.error(error);
+		} finally {
+			setLoading(false);
 		}
-	};
-	useScroll(loadMorePosts, scrollLoadRef);
+	}, [loading, page, hasNextPage]);
+	const scrollLoadRef = useScroll(fetchOnScroll);
 
 	useEffect(() => {
-		if (postsData?.posts) {
-			setPosts((prevPosts) => ({
-				meta: postsData.meta,
-				posts: [...(prevPosts?.posts ?? []), ...postsData.posts],
-			}));
-		}
-	}, [postsData]);
-	if (error) {
-		console.error(error);
-	}
+		const fetchInitialData = async () => {
+			try {
+				const data = await fetchInitialPosts(limit);
+				setPosts(data);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+		fetchInitialData();
+	}, []);
 	return (
 		<section className="container mb-4 mt-12 grid grid-rows-none gap-4 sm:grid-cols-1 lg:grid-cols-3">
-			{posts?.posts
-				? posts.posts.map((post) => {
-						return (
-							<PostCard
-								id={post.id}
-								author={post.author.username}
-								commentsCount={post._count.comments}
-								content={post.content}
-								date={post.date_posted}
-								title={post.title}
-								key={post.id}
-							/>
-						);
-					})
-				: Array.from({ length: 3 }).map(
-						// Initial fetch of 3 posts.
-						(element, index) => <PostCardSkeleton key={index} /> // eslint-disable-line sonarjs/no-array-index-key
-					)}
+			{posts?.posts ? (
+				posts.posts.map((post) => {
+					return (
+						<PostCard
+							id={post.id}
+							author={post.author.username}
+							commentsCount={post._count.comments}
+							content={post.content}
+							date={post.date_posted}
+							title={post.title}
+							key={post.id}
+						/>
+					);
+				})
+			) : (
+				<>
+					<PostCardSkeleton />
+					<PostCardSkeleton />
+					<PostCardSkeleton />
+				</>
+			)}
 
-			{posts?.meta.nextPage && (
+			{hasNextPage && posts && (
 				<>
 					<div>
-						<div ref={scrollLoadRef}></div>
+						{loading === false && posts && <div ref={scrollLoadRef}></div>}
 						<PostCardSkeleton />
 					</div>
 					<PostCardSkeleton />
 					<PostCardSkeleton />
 				</>
 			)}
-			{posts?.meta.nextPage === null && loading === false && (
+			{hasNextPage === false && (
 				<>
 					<br />
 					<div className="mx-auto">End</div>

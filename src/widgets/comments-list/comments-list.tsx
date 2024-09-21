@@ -1,11 +1,12 @@
+import { fetchOnScrollComments } from "@/api/services/comments-list/fetch";
 import { CommentsType, CommentType } from "@/api/types/api-data";
 import LoadingSpinner from "@/components/loading-spinner/loading-spinner";
 import useScroll from "@/hooks/use-scroll";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 
 import Comment from "./comment/comment";
 
-const BASE_URL = import.meta.env.VITE_API_URL;
+const limit = 6;
 
 const CommentsList = ({
 	initialComments,
@@ -20,31 +21,34 @@ const CommentsList = ({
 		{ comments: CommentType[] } | CommentsType | undefined
 	>({ comments: initialComments });
 	const [loading, setLoading] = useState<boolean>(false);
-	const scrollLoadCommentsRef = useRef<HTMLDivElement | null>(null);
+	const [hasNextPage, setHasNextPage] = useState<boolean>(true);
 	const [page, setPage] = useState<number>(2);
-	useScroll(() => fetchData(3, page), scrollLoadCommentsRef);
-	const fetchData = useCallback(
-		async (limit: number, page: number) => {
-			try {
-				setLoading(true);
-				const response = await fetch(
-					`${BASE_URL}/posts/${postId}/comments?limit=${limit}&page=${page}`
-				);
-				const data = await response.json();
-				if (data.comments.length > 0) {
-					setCommentsData((previousData) => ({
-						comments: [...(previousData?.comments || []), ...data.comments],
-					}));
-					setPage(page + 1);
+	const fetchData = useCallback(async () => {
+		if (loading && !hasNextPage) return;
+		try {
+			setLoading(true);
+			const data = await fetchOnScrollComments(+postId, limit, page);
+			if (data) {
+				setCommentsData((prevComments) => {
+					return {
+						meta: data.meta,
+						comments: [...(prevComments?.comments || []), ...data.comments],
+					};
+				});
+				if (data.meta.nextPage) {
+					setPage((p) => p + 1);
+				} else {
+					setHasNextPage(false);
 				}
-			} catch (error) {
-				console.error("ERRROR:", error);
-			} finally {
-				setLoading(false);
 			}
-		},
-		[postId]
-	);
+		} catch (error) {
+			console.error(error);
+			return <div>Something went wrong.</div>;
+		} finally {
+			setLoading(false);
+		}
+	}, [postId, hasNextPage, loading, page]);
+	const scrollLoadCommentsRef = useScroll(fetchData);
 
 	return (
 		<section className="container my-24 flex w-full max-w-[500px] flex-col gap-4">
@@ -63,13 +67,10 @@ const CommentsList = ({
 						/>
 					);
 				})}
-			{commentsData?.comments && !loading ? (
-				commentsData.comments.length < totalComments && (
-					<div ref={scrollLoadCommentsRef}></div>
-				)
-			) : (
-				<LoadingSpinner sizePx="24px" />
+			{loading === false && hasNextPage && (
+				<div ref={scrollLoadCommentsRef}></div>
 			)}
+			{hasNextPage && loading === true && <LoadingSpinner sizePx="24px" />}
 		</section>
 	);
 };

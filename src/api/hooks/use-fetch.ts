@@ -15,8 +15,8 @@ const useFetch: UseFetchType<ComponentState> = (
 
 	useEffect(() => {
 		let ignore = false;
-		setLoading(true);
 		const fetchData = async () => {
+			setLoading(true);
 			let options = {};
 			if (method !== "get") {
 				options = {

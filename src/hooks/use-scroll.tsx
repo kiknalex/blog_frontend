@@ -1,14 +1,11 @@
-import { MutableRefObject, useEffect } from "react";
+import { useCallback } from "react";
 
-const useScroll = (
-	callback: VoidFunction,
-	targetRef: MutableRefObject<HTMLElement | null>
-) => {
-	useEffect(() => {
-		if (targetRef.current) {
-			const targetElement = targetRef.current;
+const useScroll = (callback: VoidFunction) => {
+	const sentinelRef = useCallback(
+		(targetRef: HTMLDivElement) => {
 			const options = {
-				threshold: 1,
+				rootMargin: "500px 0px 400px 0px",
+				threshold: 0,
 			};
 			const observerCallback = (entries: IntersectionObserverEntry[]) => {
 				if (entries[0].isIntersecting) {
@@ -16,11 +13,14 @@ const useScroll = (
 				}
 			};
 			const observer = new IntersectionObserver(observerCallback, options);
-			observer.observe(targetElement);
-			return () => {
-				observer.unobserve(targetElement);
-			};
-		}
-	}, [targetRef, callback]);
+			if (targetRef) {
+				observer.observe(targetRef);
+			} else {
+				observer.disconnect();
+			}
+		},
+		[callback]
+	);
+	return sentinelRef;
 };
 export default useScroll;
