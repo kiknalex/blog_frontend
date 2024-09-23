@@ -10,6 +10,14 @@ export type UseFetchType<T> = (
 	baseUrl?: string
 ) => UseFetchResponseType<T>;
 
+export type fetchWrapperType<T> = (
+	endpoint: string,
+	body?: object | string,
+	headers?: object,
+	method?: HttpMethod,
+	baseUrl?: string
+) => Promise<T>;
+
 export type UseFetchResponseType<T> = [
 	data: T | undefined,
 	loading: boolean,
