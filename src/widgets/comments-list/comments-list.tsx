@@ -1,9 +1,13 @@
-import { fetchOnScrollComments } from "@/api/services/comments-list/fetch";
+import {
+	fetchLatestComment,
+	fetchOnScrollComments,
+} from "@/api/services/comments-list/fetch";
 import { CommentsType, CommentType } from "@/api/types/api-data";
 import LoadingSpinner from "@/components/loading-spinner/loading-spinner";
 import AddComment from "@/features/add-comment/add-comment";
 import useScroll from "@/hooks/use-scroll";
-import { FunctionComponent, useCallback, useState } from "react";
+import { FunctionComponent, useCallback, useEffect, useState } from "react";
+import { useFetcher } from "react-router-dom";
 
 import Comment from "./comment/comment";
 
@@ -24,6 +28,8 @@ const CommentsList: FunctionComponent<Props> = ({
 	const [loading, setLoading] = useState<boolean>(false);
 	const [hasNextPage, setHasNextPage] = useState<boolean>(true);
 	const [page, setPage] = useState<number>(2);
+	const [commentsCount, setCommentsCount] = useState(totalComments);
+	const fetcher = useFetcher({ key: "add-new-comment" });
 	const fetchData = useCallback(async () => {
 		if (loading && !hasNextPage) return;
 		try {
@@ -49,12 +55,34 @@ const CommentsList: FunctionComponent<Props> = ({
 			setLoading(false);
 		}
 	}, [postId, hasNextPage, loading, page]);
+
 	const scrollLoadCommentsRef = useScroll(fetchData);
+	useEffect(() => {
+		const addLatestComment = async () => {
+			if (fetcher.data?.ok) {
+				try {
+					const data = await fetchLatestComment(+postId);
+					if (data?.comments) {
+						setCommentsData((prevComments) => {
+							return {
+								comments: [...data.comments, ...(prevComments?.comments || [])],
+								meta: data.meta,
+							};
+						});
+						setCommentsCount((prevCount) => prevCount + 1);
+					}
+				} catch (error) {
+					console.error(error);
+				}
+			}
+		};
+		addLatestComment();
+	}, [fetcher.data, postId]);
 
 	return (
 		<section className="container my-24 flex w-full max-w-[500px] flex-col gap-4">
 			<h1 className="text-2xl">
-				Comments <span>({totalComments})</span>
+				Comments <span>({commentsCount})</span>
 			</h1>
 			<AddComment />
 			{commentsData?.comments &&

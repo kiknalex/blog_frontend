@@ -16,3 +16,17 @@ export const fetchOnScrollComments = async (
 		console.error(error);
 	}
 };
+
+export const fetchLatestComment = async (
+	postId: number
+): Promise<CommentsType | undefined> => {
+	try {
+		const response = await fetch(
+			`${BASE_URL}/posts/${postId}/comments?limit=1`
+		);
+		const data = await response.json();
+		return data;
+	} catch (error) {
+		console.error(error);
+	}
+};
