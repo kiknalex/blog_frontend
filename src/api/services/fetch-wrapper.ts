@@ -17,13 +17,12 @@ const fetchWrapper: fetchWrapperType<"Success!" | null> = async (
 	}
 	try {
 		const response = await fetch(baseUrl + endpoint, options);
-
 		if (!response.ok) {
 			throw new Error(`Error: ${response.status} ${response.statusText}`);
 		}
 		return await response.json();
 	} catch (error) {
-		console.error(error);
+		throw new Error(String(error));
 	}
 };
 export default fetchWrapper;

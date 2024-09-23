@@ -1,5 +1,5 @@
 import { dateWithTimeFormatter } from "@/utils/date-formatter";
-
+import he from "he";
 interface CommentPropsType {
 	content: string;
 	date: string;
@@ -16,7 +16,7 @@ const Comment = ({ author = "Anonymous", content, date }: CommentPropsType) => {
 					{dateWithTimeFormatter.format(new Date(date))}
 				</time>
 			</p>
-			<p className="mt-4">{content}</p>
+			<p className="mt-4">{he.decode(content)}</p>
 		</article>
 	);
 };
