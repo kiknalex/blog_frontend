@@ -1,4 +1,4 @@
-import { CommentsType } from "@/api/types/api-data";
+import { CommentsType } from "@/types/api/api-data";
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const fetchOnScrollComments = async (

@@ -1,4 +1,4 @@
-import { fetchWrapperType } from "../types/fetch";
+import { fetchWrapperType } from "../../types/api/fetch";
 
 const fetchWrapper: fetchWrapperType<"Success!" | null> = async (
 	endpoint,

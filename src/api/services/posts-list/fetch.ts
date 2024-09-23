@@ -1,4 +1,4 @@
-import { PostsType } from "@/api/types/api-data";
+import { PostsType } from "@/types/api/api-data";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 

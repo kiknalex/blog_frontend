@@ -1,6 +1,6 @@
 import { ComponentState, useEffect, useState } from "react";
 
-import { UseFetchType } from "../types/fetch";
+import { UseFetchType } from "../../types/api/fetch";
 
 const useFetch: UseFetchType<ComponentState> = (
 	endpoint,

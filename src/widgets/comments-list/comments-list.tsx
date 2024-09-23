@@ -2,10 +2,10 @@ import {
 	fetchLatestComment,
 	fetchOnScrollComments,
 } from "@/api/services/comments-list/fetch";
-import { CommentsType, CommentType } from "@/api/types/api-data";
 import LoadingSpinner from "@/components/loading-spinner/loading-spinner";
 import AddComment from "@/features/add-comment/add-comment";
 import useScroll from "@/hooks/use-scroll";
+import { CommentsType, CommentType } from "@/types/api/api-data";
 import { FunctionComponent, useCallback, useEffect, useState } from "react";
 import { useFetcher } from "react-router-dom";
 

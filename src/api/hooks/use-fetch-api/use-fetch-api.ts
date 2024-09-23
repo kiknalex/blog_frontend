@@ -4,7 +4,7 @@ import {
 	GetPostCommentsType,
 	GetUsersType,
 	UseFetchResponseType,
-} from "@/api/types/fetch";
+} from "@/types/api/fetch";
 
 import useFetch from "../use-fetch";
 
