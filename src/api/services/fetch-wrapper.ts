@@ -1,6 +1,6 @@
 import { fetchWrapperType } from "../../types/api/fetch";
 
-const fetchWrapper: fetchWrapperType<"Success!" | null> = async (
+const fetchWrapper: fetchWrapperType<{ message: string } | null> = async (
 	endpoint,
 	body,
 	headers,

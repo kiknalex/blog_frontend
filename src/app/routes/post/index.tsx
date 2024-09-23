@@ -1,4 +1,4 @@
-import { useGetPost } from "@/api/hooks/use-fetch-api/use-fetch-api";
+import { useGetPost } from "@/hooks/api/use-fetch-api/use-fetch-api";
 import CommentsList from "@/widgets/comments-list/comments-list";
 import Post from "@/widgets/post/post";
 import PostSkeleton from "@/widgets/post/post-skeleton";
