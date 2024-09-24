@@ -16,6 +16,7 @@ interface Props {
 	postId: string;
 	totalComments: number;
 }
+
 const limit = 6;
 const CommentsList: FunctionComponent<Props> = ({
 	initialComments,
@@ -31,17 +32,23 @@ const CommentsList: FunctionComponent<Props> = ({
 	const [commentsCount, setCommentsCount] = useState(totalComments);
 	const fetcher = useFetcher({ key: "add-new-comment" });
 	const fetchData = useCallback(async () => {
-		if (loading && !hasNextPage) return;
+		if (loading || !hasNextPage) return;
 		try {
 			setLoading(true);
 			const data = await fetchOnScrollComments(+postId, limit, page);
 			if (data) {
 				setCommentsData((prevComments) => {
+					const existingCommentIds = prevComments?.comments.map((c) => c.id);
+					const newComments = data.comments.filter(
+						(comment) => !existingCommentIds?.includes(comment.id)
+					);
+
 					return {
 						meta: data.meta,
-						comments: [...(prevComments?.comments || []), ...data.comments],
+						comments: [...(prevComments?.comments || []), ...newComments],
 					};
 				});
+
 				if (data.meta.nextPage) {
 					setPage((p) => p + 1);
 				} else {
@@ -50,13 +57,13 @@ const CommentsList: FunctionComponent<Props> = ({
 			}
 		} catch (error) {
 			console.error(error);
-			return <div>Something went wrong.</div>;
 		} finally {
 			setLoading(false);
 		}
 	}, [postId, hasNextPage, loading, page]);
 
 	const scrollLoadCommentsRef = useScroll(fetchData);
+
 	useEffect(() => {
 		const addLatestComment = async () => {
 			if (fetcher.data) {
