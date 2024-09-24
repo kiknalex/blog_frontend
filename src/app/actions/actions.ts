@@ -1,5 +1,5 @@
-import fetchWrapper from "@/api/services/fetch-wrapper";
 import { isSuccessType } from "@/types/api/fetch";
+import fetchWrapper from "@/utils/fetch-wrapper";
 import { ActionFunction } from "react-router-dom";
 
 export const addComment: ActionFunction = async ({ request, params }) => {
