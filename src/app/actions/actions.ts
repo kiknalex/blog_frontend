@@ -37,7 +37,14 @@ export const login: ActionFunction<{ token: string }> = async ({ request }) => {
 
 	const response = await fetchWrapper(`/users/login`, body, headers, "post");
 	if (isSuccessType(response)) {
-		localStorage.setItem("session-token", JSON.stringify(response.token));
+		const currentDate = new Date();
+		const expiresAt = currentDate.setTime(
+			currentDate.getTime() + 60 * 60 * 1000
+		);
+		localStorage.setItem(
+			"session-token",
+			JSON.stringify({ token: response.token, expiresAt })
+		);
 		return { ok: true };
 	} else {
 		return { ok: false, ...response };
