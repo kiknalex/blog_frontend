@@ -1,6 +1,12 @@
 import { isSuccessType } from "@/types/api/fetch";
 import fetchWrapper from "@/utils/fetch-wrapper";
+import { isLoggedIn } from "@/utils/is-logged-in";
 import { ActionFunction } from "react-router-dom";
+
+type Headers = {
+	Authorization?: string;
+	"Content-Type": string;
+};
 
 export const addComment: ActionFunction = async ({ request, params }) => {
 	if (request.method === "POST") {
@@ -8,12 +14,20 @@ export const addComment: ActionFunction = async ({ request, params }) => {
 		const formData = await request.formData();
 		const content = formData.get("content");
 		const body = { content };
-		const headers = {
+		const anon = isLoggedIn() ? "" : "?anon=true";
+		let headers: Headers = {
 			"Content-Type": "application/json",
 		};
+		if (isLoggedIn()) {
+			const token = JSON.parse(localStorage.getItem("session-token")!);
+			headers = {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token.token}`,
+			};
+		}
 
 		const data = await fetchWrapper(
-			`/posts/${postId}/comments?anon=true`,
+			`/posts/${postId}/comments${anon}`,
 			body,
 			headers,
 			"post"

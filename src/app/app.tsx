@@ -5,7 +5,7 @@ import Header from "@/widgets/header/header";
 import { useEffect, useState } from "react";
 import { Outlet, ScrollRestoration, useFetcher } from "react-router-dom";
 function App() {
-	const [loggedIn, setLoggedIn] = useState(isLoggedIn);
+	const [loggedIn, setLoggedIn] = useState(isLoggedIn());
 	const fetcher = useFetcher({ key: "login" });
 
 	useEffect(() => {
@@ -13,6 +13,7 @@ function App() {
 			setLoggedIn(isLoggedIn());
 		}
 	}, [fetcher.state, fetcher.data]);
+
 	return (
 		<AuthContext.Provider value={loggedIn}>
 			<ScrollRestoration />
