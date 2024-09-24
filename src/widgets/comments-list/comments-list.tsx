@@ -59,7 +59,7 @@ const CommentsList: FunctionComponent<Props> = ({
 	const scrollLoadCommentsRef = useScroll(fetchData);
 	useEffect(() => {
 		const addLatestComment = async () => {
-			if (fetcher.data?.ok) {
+			if (fetcher.data) {
 				try {
 					const data = await fetchLatestComment(+postId);
 					if (data?.comments) {
