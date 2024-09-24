@@ -10,19 +10,21 @@ export type UseFetchType<T> = (
 	baseUrl?: string
 ) => UseFetchResponseType<T>;
 
-export type fetchWrapperType<T> = (
-	endpoint: string,
-	body?: object | string,
-	headers?: object,
-	method?: HttpMethod,
-	baseUrl?: string
-) => Promise<T>;
-
 export type UseFetchResponseType<T> = [
 	data: T | undefined,
 	loading: boolean,
 	error: Error | undefined,
 ];
+
+type LoginSuccessType = { token: string };
+type LoginErrorType = { message: string };
+export type IsLoginSuccessType = LoginSuccessType | LoginErrorType;
+
+export const isSuccessType = (
+	response: IsLoginSuccessType
+): response is LoginSuccessType => {
+	return (response as LoginSuccessType).token !== undefined;
+};
 
 export type GetAllPostsType = PostsType | undefined;
 export type GetPostByIdType = PostByIdType | undefined;

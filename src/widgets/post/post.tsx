@@ -1,5 +1,6 @@
+import { useAuthContext } from "@/hooks/auth/use-auth";
 import { dateFormatter } from "@/utils/date-formatter";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useContext } from "react";
 
 interface Props {
 	author: string;
@@ -9,6 +10,8 @@ interface Props {
 }
 
 const Post: FunctionComponent<Props> = ({ author, content, date, title }) => {
+	const context = useContext(useAuthContext());
+	console.log(context);
 	return (
 		<>
 			<h1 className="text-5xl font-bold text-gray-800">{title}</h1>

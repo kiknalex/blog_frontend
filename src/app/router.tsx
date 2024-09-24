@@ -4,9 +4,10 @@ import {
 	Route,
 } from "react-router-dom";
 
-import { addComment } from "./actions/actions";
+import { addComment, login } from "./actions/actions";
 import App from "./app";
 import HomePage from "./routes/home";
+import LoginPage from "./routes/login";
 import PostPage from "./routes/post";
 
 const router = createBrowserRouter(
@@ -14,6 +15,7 @@ const router = createBrowserRouter(
 		<Route element={<App />}>
 			<Route element={<HomePage />} path="/" />
 			<Route action={addComment} element={<PostPage />} path="/posts/:postId" />
+			<Route action={login} element={<LoginPage />} path="/login" />
 		</Route>
 	)
 );

@@ -1,11 +1,9 @@
-import { fetchWrapperType } from "../../types/api/fetch";
-
-const fetchWrapper: fetchWrapperType<object | null> = async (
-	endpoint,
-	body,
-	headers,
-	method = "get",
-	baseUrl = import.meta.env.VITE_API_URL
+const fetchWrapper = async (
+	endpoint: string,
+	body?: object | string,
+	headers?: HeadersInit,
+	method: string = "get",
+	baseUrl: string = import.meta.env.VITE_API_URL
 ) => {
 	let options = {};
 	if (method !== "get" && body) {
@@ -15,14 +13,9 @@ const fetchWrapper: fetchWrapperType<object | null> = async (
 			method,
 		};
 	}
-	try {
-		const response = await fetch(baseUrl + endpoint, options);
-		if (!response.ok) {
-			throw new Error(`Error: ${response.status} ${response.statusText}`);
-		}
-		return await response.json();
-	} catch (error) {
-		throw new Error(String(error));
-	}
+
+	const response = await fetch(baseUrl + endpoint, options);
+	const data = await response.json();
+	return data;
 };
 export default fetchWrapper;
