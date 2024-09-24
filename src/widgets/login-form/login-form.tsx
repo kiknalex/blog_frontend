@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useFetcher, useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
-	const fetcher = useFetcher();
+	const fetcher = useFetcher({ key: "login" });
 	const [displayError, setDisplayError] = useState(false);
 	const formRef = useRef<HTMLFormElement>(null);
 	const navigate = useNavigate();

@@ -1,15 +1,25 @@
+import { AuthContext } from "@/hooks/context/auth-context";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+
 const Nav = () => {
+	const loggedIn = useContext(AuthContext);
+
 	return (
 		<nav className="flex gap-1">
-			<a className="px-1 hover:text-yellow-500" href="/">
+			<Link className="px-1 hover:text-yellow-500" to="/">
 				Home
-			</a>
-			<a className="px-1 hover:text-yellow-500" href="/posts">
-				Posts
-			</a>
-			<a className="px-1 hover:text-yellow-500" href="login">
-				Login
-			</a>
+			</Link>
+
+			{loggedIn ? (
+				<Link className="px-1 hover:text-yellow-500" to="/profile">
+					Profile
+				</Link>
+			) : (
+				<Link className="px-1 hover:text-yellow-500" to="/login">
+					Login
+				</Link>
+			)}
 		</nav>
 	);
 };
