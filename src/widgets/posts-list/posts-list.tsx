@@ -2,8 +2,8 @@ import {
 	fetchInitialPosts,
 	fetchOnScrollPosts,
 } from "@/api/services/posts-list/fetch";
-import { GetAllPostsType } from "@/api/types/fetch";
 import useScroll from "@/hooks/use-scroll";
+import { GetAllPostsType } from "@/types/api/fetch";
 import { useCallback, useEffect, useState } from "react";
 
 import PostCard from "./post-card/post-card";
