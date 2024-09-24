@@ -1,3 +1,4 @@
+import { ButtonShowPassword } from "@/components/button-show-password/button-show-password";
 import LoadingSpinner from "@/components/loading-spinner/loading-spinner";
 import { useEffect, useRef, useState } from "react";
 import { Link, useFetcher, useNavigate } from "react-router-dom";
@@ -5,7 +6,9 @@ import { Link, useFetcher, useNavigate } from "react-router-dom";
 const LoginForm = () => {
 	const fetcher = useFetcher({ key: "login" });
 	const [displayError, setDisplayError] = useState(false);
+	const [passwordVisible, setPasswordVisible] = useState(false);
 	const formRef = useRef<HTMLFormElement>(null);
+
 	const navigate = useNavigate();
 	useEffect(() => {
 		if (formRef.current && fetcher.state === "idle") {
@@ -57,17 +60,23 @@ const LoginForm = () => {
 						>
 							Password
 						</label>
-						<input
-							id="password"
-							className=" block w-full rounded-lg border border-gray-400 bg-gray-50 p-2.5 text-gray-900"
-							minLength={8}
-							name="password"
-							placeholder="••••••••"
-							required
-							type="password"
-						/>
+						<div className="relative">
+							<input
+								id="password"
+								className="block w-full rounded-lg border border-gray-400 bg-gray-50 p-2.5 text-gray-900"
+								minLength={8}
+								name="password"
+								placeholder="••••••••"
+								required
+								type={passwordVisible ? "text" : "password"}
+							/>
+							<ButtonShowPassword
+								onClick={() => setPasswordVisible(!passwordVisible)}
+								visible={passwordVisible}
+							/>
+						</div>
 					</div>
-					<p className=" text-red-500">
+					<p className="text-red-500">
 						{(displayError && fetcher.data?.message) || ""}
 					</p>
 					<button
