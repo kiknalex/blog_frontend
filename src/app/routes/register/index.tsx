@@ -1,4 +1,4 @@
-import { isLoggedIn } from "@/utils/is-logged-in";
+import { isLoggedIn } from "@/utils/auth";
 import RegisterForm from "@/widgets/register-form/register-form";
 import { useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";

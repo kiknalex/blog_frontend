@@ -1,5 +1,5 @@
 import { AuthContext } from "@/hooks/context/auth-context";
-import { isLoggedIn } from "@/utils/is-logged-in";
+import { isLoggedIn } from "@/utils/auth";
 import Footer from "@/widgets/footer/footer";
 import Header from "@/widgets/header/header";
 import { useEffect, useState } from "react";

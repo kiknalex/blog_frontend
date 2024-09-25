@@ -1,6 +1,6 @@
 import { isSuccessType } from "@/types/api/fetch";
+import { isLoggedIn } from "@/utils/auth";
 import fetchWrapper from "@/utils/fetch-wrapper";
-import { isLoggedIn } from "@/utils/is-logged-in";
 import { isStatusOk } from "@/utils/is-status-ok";
 import { ActionFunction } from "react-router-dom";
 
