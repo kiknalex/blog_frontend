@@ -30,3 +30,8 @@ export type GetAllPostsType = PostsType | undefined;
 export type GetPostByIdType = PostByIdType | undefined;
 export type GetPostCommentsType = CommentsType | undefined;
 export type GetUsersType = UserType[] | undefined;
+
+export type ValidationErrorType = {
+	field: string;
+	message: string;
+};
