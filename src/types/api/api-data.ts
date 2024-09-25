@@ -53,3 +53,29 @@ interface MetaType {
 	currentPage: number;
 	nextPage: number | null;
 }
+
+export interface ProfileType {
+	id: number;
+	username: string;
+	role: "USER" | "ADMIN";
+	posts: ProfilePostType[] | [];
+	comments: ProfileCommentType[] | [];
+}
+
+interface ProfilePostType {
+	id: number;
+	date_posted: string;
+	title: string;
+	content: string;
+	published: boolean;
+	_count: {
+		comments: number;
+	};
+}
+
+interface ProfileCommentType {
+	id: number;
+	date_posted: string;
+	content: string;
+	postId: number;
+}
