@@ -1,13 +1,13 @@
 import { isLoggedIn } from "@/utils/is-logged-in";
 import RegisterForm from "@/widgets/register-form/register-form";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
 	const navigate = useNavigate();
 	const loggedIn = isLoggedIn();
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (loggedIn) {
 			navigate("/");
 		}
