@@ -3,7 +3,7 @@ import { FunctionComponent } from "react";
 import { Link } from "react-router-dom";
 interface Props {
 	id: number;
-	author: string;
+	author?: string;
 	commentsCount: number;
 	content: string;
 	date: string;
@@ -27,9 +27,11 @@ const PostCard: FunctionComponent<Props> = ({
 			<p className="mt-6 max-h-36  overflow-hidden text-slate-500 ">
 				{content}...
 			</p>
-			<p className="mt-4 text-slate-800">
-				By <b>{author}</b>
-			</p>
+			{author && (
+				<p className="mt-4 text-slate-800">
+					By <b>{author}</b>
+				</p>
+			)}
 			<p className="text-slate-600">Comments: {commentsCount}</p>
 			<div className="flex justify-between">
 				<time className="text-slate-600" dateTime={date}>
