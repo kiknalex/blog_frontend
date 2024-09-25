@@ -16,6 +16,6 @@ const fetchWrapper = async (
 
 	const response = await fetch(baseUrl + endpoint, options);
 	const data = await response.json();
-	return data;
+	return { statusCode: response.status, data };
 };
 export default fetchWrapper;
