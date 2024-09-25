@@ -121,6 +121,8 @@ export default tseslint.config(
 				},
 			],
 			"sonarjs/jsx-key": "off",
+			"sonarjs/pluginRules-of-hooks": "off",
+			"no-extra-boolean-cast": "off",
 			"unicorn/no-useless-undefined": ["error", { checkArguments: false }],
 		},
 	}
