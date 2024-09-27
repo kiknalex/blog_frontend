@@ -54,43 +54,45 @@ const PostsList = () => {
 		fetchInitialData();
 	}, []);
 	return (
-		<section className="container mb-4 mt-12 grid grid-rows-none gap-4 sm:grid-cols-1 lg:grid-cols-3">
-			{posts?.posts ? (
-				posts.posts.map((post) => {
-					return (
-						<PostCard
-							id={post.id}
-							author={post.author.username}
-							commentsCount={post._count.comments}
-							content={post.content}
-							date={post.date_posted}
-							title={post.title}
-							key={post.id}
-						/>
-					);
-				})
-			) : (
-				<>
-					<PostCardSkeleton />
-					<PostCardSkeleton />
-					<PostCardSkeleton />
-				</>
-			)}
-
-			{hasNextPage && posts && (
-				<>
-					<div>
-						{loading === false && posts && <div ref={scrollLoadRef}></div>}
+		<section className="container mb-4 mt-12 ">
+			<div className="grid grid-rows-none gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+				{posts?.posts ? (
+					posts.posts.map((post) => {
+						return (
+							<PostCard
+								id={post.id}
+								author={post.author.username}
+								commentsCount={post._count.comments}
+								content={post.content}
+								date={post.date_posted}
+								title={post.title}
+								key={post.id}
+							/>
+						);
+					})
+				) : (
+					<>
 						<PostCardSkeleton />
-					</div>
-					<PostCardSkeleton />
-					<PostCardSkeleton />
-				</>
-			)}
+						<PostCardSkeleton />
+						<PostCardSkeleton />
+					</>
+				)}
+
+				{hasNextPage && posts && (
+					<>
+						<div>
+							{loading === false && posts && <div ref={scrollLoadRef}></div>}
+							<PostCardSkeleton />
+						</div>
+						<PostCardSkeleton />
+						<PostCardSkeleton />
+					</>
+				)}
+			</div>
 			{hasNextPage === false && (
 				<>
 					<br />
-					<div className="mx-auto">End</div>
+					<div className="text-center">End</div>
 				</>
 			)}
 		</section>

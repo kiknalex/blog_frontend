@@ -21,7 +21,7 @@ const PostCard: FunctionComponent<Props> = ({
 	const formattedDate = dateFormatter.format(new Date(date));
 	return (
 		<div className="flex h-min flex-col rounded p-8 shadow-lg">
-			<h2 className="text-3xl font-semibold hover:text-yellow-500">
+			<h2 className="text-xl font-semibold hover:text-yellow-500 md:text-2xl lg:text-3xl">
 				<Link to={`/posts/${id}`}>{title}</Link>
 			</h2>
 			<p className="mt-6 max-h-36  overflow-hidden text-slate-500 ">
