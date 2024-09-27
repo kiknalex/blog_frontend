@@ -6,13 +6,13 @@ import Nav from "./nav/nav";
 
 const Header = () => {
 	return (
-		<header className="container flex h-[85px] items-center justify-between">
-			<Link aria-label="Home" to="/">
+		<header className="container flex h-[85px] items-center justify-center  xxs:justify-between">
+			<Link aria-label="Home" className="hidden xxs:flex" to="/">
 				<img alt="HotCoffee logo" src={logoUrl} />
 			</Link>
 			<div className="flex items-center gap-2">
 				<Nav />
-				<SocMediaIconsRow />
+				<SocMediaIconsRow className="hidden md:flex " />
 			</div>
 		</header>
 	);

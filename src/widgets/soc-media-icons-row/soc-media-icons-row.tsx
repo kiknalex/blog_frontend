@@ -1,8 +1,8 @@
 import SocLink from "@/components/soc-link/soc-link";
 
-const SocMediaIconsRow = () => {
+const SocMediaIconsRow = ({ className }: { className?: string }) => {
 	return (
-		<div className="flex items-center gap-2">
+		<div className={`flex items-center gap-2 ${className}`}>
 			<SocLink
 				className="text-2xl"
 				socMedia="github"
