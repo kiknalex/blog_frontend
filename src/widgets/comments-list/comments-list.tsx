@@ -87,7 +87,7 @@ const CommentsList: FunctionComponent<Props> = ({
 	}, [fetcher.data, postId]);
 
 	return (
-		<section className="container my-24 flex w-full max-w-[500px] flex-col gap-4">
+		<section className="container my-24 flex w-full max-w-screen-xs flex-col gap-4">
 			<h1 className="text-2xl">
 				Comments <span>({commentsCount})</span>
 			</h1>
