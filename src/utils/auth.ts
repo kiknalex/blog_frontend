@@ -6,7 +6,11 @@ export const isLoggedIn = () => {
 
 	const sessionToken = JSON.parse(sessionTokenString);
 
-	return sessionToken.expiresAt > Date.now() ? true : false;
+	const isValid = sessionToken.expiresAt > Date.now() - 10_000 ? true : false;
+	if (!isValid) {
+		localStorage.removeItem("session-token");
+	}
+	return isValid;
 };
 export const headersWithToken = (): HeadersInit | undefined => {
 	const tokenToParse = localStorage.getItem("session-token");
@@ -17,6 +21,19 @@ export const headersWithToken = (): HeadersInit | undefined => {
 			Authorization: `Bearer ${token.token}`,
 		};
 		return new Headers(headers);
+	} else {
+		return undefined;
+	}
+};
+
+export const getIdAndUsername = ():
+	| [userId: number, username: string]
+	| undefined => {
+	const tokenToParse = localStorage.getItem("session-token");
+
+	if (tokenToParse) {
+		const userInfo = JSON.parse(localStorage.getItem("session-token")!);
+		return [userInfo.userId, userInfo.username];
 	} else {
 		return undefined;
 	}
