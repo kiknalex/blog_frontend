@@ -1,3 +1,4 @@
+import { ProfileType } from "@/types/api/api-data";
 import {
 	GetAllPostsType,
 	GetPostByIdType,
@@ -5,6 +6,8 @@ import {
 	GetUsersType,
 	UseFetchResponseType,
 } from "@/types/api/fetch";
+import { headersWithToken } from "@/utils/auth";
+import { useMemo } from "react";
 
 import useFetch from "../use-fetch";
 
@@ -48,3 +51,9 @@ export const useGetPostComments = (
 
 export const useGetUsers = (): UseFetchResponseType<GetUsersType> =>
 	useFetch(`/users`);
+
+export const useGetProfile = (): UseFetchResponseType<ProfileType> => {
+	const headers = useMemo(() => headersWithToken(), []);
+
+	return useFetch("/profile", headers);
+};
