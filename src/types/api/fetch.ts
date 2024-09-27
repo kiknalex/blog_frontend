@@ -4,8 +4,8 @@ export type HttpMethod = "get" | "post" | "put" | "delete";
 
 export type UseFetchType<T> = (
 	endpoint: string,
+	headers?: HeadersInit,
 	body?: object | string,
-	headers?: object,
 	method?: HttpMethod,
 	baseUrl?: string
 ) => UseFetchResponseType<T>;
@@ -16,7 +16,7 @@ export type UseFetchResponseType<T> = [
 	error: Error | undefined,
 ];
 
-type LoginSuccessType = { token: string };
+type LoginSuccessType = { token: string; userId: number; username: string };
 type LoginErrorType = { message: string };
 export type IsLoginSuccessType = LoginSuccessType | LoginErrorType;
 

@@ -4,8 +4,8 @@ import { UseFetchType } from "../../types/api/fetch";
 
 const useFetch: UseFetchType<ComponentState> = (
 	endpoint,
-	body,
 	headers,
+	body,
 	method = "get",
 	baseUrl = import.meta.env.VITE_API_URL
 ) => {
@@ -17,14 +17,16 @@ const useFetch: UseFetchType<ComponentState> = (
 		let ignore = false;
 		const fetchData = async () => {
 			setLoading(true);
-			let options = {};
-			if (method !== "get") {
-				options = {
-					body: JSON.stringify(body),
-					headers: { "Content-Type": "application/json", ...headers },
-					method,
-				};
-			}
+			const options =
+				method === "get"
+					? {
+							headers,
+						}
+					: {
+							body: JSON.stringify(body),
+							headers,
+							method,
+						};
 			await fetch(baseUrl + endpoint, options)
 				.then((response) => response.json())
 				.then((data) => {

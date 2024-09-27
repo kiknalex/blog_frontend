@@ -62,7 +62,7 @@ export interface ProfileType {
 	comments: ProfileCommentType[] | [];
 }
 
-interface ProfilePostType {
+export interface ProfilePostType {
 	id: number;
 	date_posted: string;
 	title: string;
@@ -73,7 +73,7 @@ interface ProfilePostType {
 	};
 }
 
-interface ProfileCommentType {
+export interface ProfileCommentType {
 	id: number;
 	date_posted: string;
 	content: string;
