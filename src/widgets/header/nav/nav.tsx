@@ -12,9 +12,14 @@ const Nav = () => {
 			</Link>
 
 			{loggedIn ? (
-				<Link className="px-1 hover:text-yellow-500" to="/profile">
-					Profile
-				</Link>
+				<>
+					<Link className="px-1 hover:text-yellow-500" to="/profile">
+						Profile
+					</Link>
+					<Link className="px-1 hover:text-yellow-500" to="/posts/new">
+						Create new post
+					</Link>
+				</>
 			) : (
 				<Link className="px-1 hover:text-yellow-500" to="/login">
 					Login
