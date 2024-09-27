@@ -27,13 +27,13 @@ export const headersWithToken = (): HeadersInit | undefined => {
 };
 
 export const getIdAndUsername = ():
-	| [userId: number, username: string]
+	| { userId: number; username: string }
 	| undefined => {
 	const tokenToParse = localStorage.getItem("session-token");
 
 	if (tokenToParse) {
 		const userInfo = JSON.parse(localStorage.getItem("session-token")!);
-		return [userInfo.userId, userInfo.username];
+		return { userId: userInfo.userId, username: userInfo.username };
 	} else {
 		return undefined;
 	}
