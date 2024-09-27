@@ -3,9 +3,9 @@ import {
 	fetchOnScrollComments,
 } from "@/api/services/comments-list/fetch";
 import LoadingSpinner from "@/components/loading-spinner/loading-spinner";
-import AddComment from "@/features/add-comment/add-comment";
 import useScroll from "@/hooks/use-scroll";
 import { CommentsType, CommentType } from "@/types/api/api-data";
+import AddComment from "@/widgets/comments-list/add-comment/add-comment";
 import { FunctionComponent, useCallback, useEffect, useState } from "react";
 import { useFetcher } from "react-router-dom";
 
