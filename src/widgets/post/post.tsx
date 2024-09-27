@@ -59,7 +59,7 @@ const Post: FunctionComponent<Props> = ({
 					<time dateTime={date}>{dateFormatter.format(new Date(date))}</time>
 				</div>
 				{isUserAuthor && (
-					<div className="flex flex-col md:flex-row">
+					<div className="flex flex-col gap-2 md:flex-row">
 						<button
 							className="w-24 items-center rounded-lg bg-yellow-300 px-4 py-2.5 text-center text-xs font-medium text-black  hover:bg-yellow-400 focus:ring-1 focus:ring-yellow-400"
 							onClick={handleEditClick}
@@ -67,7 +67,7 @@ const Post: FunctionComponent<Props> = ({
 							Edit
 						</button>
 						<button
-							className="mt-1 w-24 items-center rounded-lg bg-red-500 px-4 py-2.5 text-center text-xs font-medium text-black hover:bg-red-600  focus:ring-1 focus:ring-yellow-400 md:ml-4"
+							className="w-24 items-center rounded-lg bg-red-500 px-4 py-2.5 text-center text-xs font-medium text-black hover:bg-red-600  focus:ring-1 focus:ring-red-400 md:ml-4"
 							onClick={handleDeleteClick}
 						>
 							Delete
