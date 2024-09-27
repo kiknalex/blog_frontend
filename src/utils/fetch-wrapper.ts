@@ -15,7 +15,11 @@ const fetchWrapper = async (
 	}
 
 	const response = await fetch(baseUrl + endpoint, options);
-	const data = await response.json();
+	const contentType = response.headers.get("content-type");
+
+	const data = await (contentType && contentType.includes("application/json")
+		? response.json()
+		: response.text());
 	return { statusCode: response.status, data };
 };
 export default fetchWrapper;
