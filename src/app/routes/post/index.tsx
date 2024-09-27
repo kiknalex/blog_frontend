@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 
 const PostPage = () => {
 	const { postId } = useParams();
+
 	if (!postId) {
 		throw new Error("Post id is undefined.");
 	}
@@ -16,6 +17,7 @@ const PostPage = () => {
 	if (error) {
 		throw new Error(error.toString());
 	}
+
 	return (
 		<article className="container mt-12 h-auto max-w-5xl">
 			{data && loading !== true ? (
@@ -24,6 +26,7 @@ const PostPage = () => {
 						author={data.author.username}
 						content={data.content}
 						date={data.date_posted}
+						postId={postId}
 						title={data.title}
 					/>
 					<CommentsList

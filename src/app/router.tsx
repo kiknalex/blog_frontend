@@ -4,7 +4,7 @@ import {
 	Route,
 } from "react-router-dom";
 
-import { addComment, login, register } from "./actions/actions";
+import { addComment, editPost, login, register } from "./actions/actions";
 import App from "./app";
 import HomePage from "./routes/home";
 import LoginPage from "./routes/login";
@@ -16,7 +16,9 @@ const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Route element={<App />}>
 			<Route element={<HomePage />} path="/" />
-			<Route action={addComment} element={<PostPage />} path="/posts/:postId" />
+			<Route action={addComment} element={<PostPage />} path="/posts/:postId">
+				<Route action={editPost} path="edit" />
+			</Route>
 			<Route action={login} element={<LoginPage />} path="/login" />
 			<Route action={register} element={<RegisterPage />} path="/register" />
 			<Route element={<ProfilePage />} path="/profile" />

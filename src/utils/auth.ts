@@ -32,7 +32,7 @@ export const getIdAndUsername = ():
 	const tokenToParse = localStorage.getItem("session-token");
 
 	if (tokenToParse) {
-		const userInfo = JSON.parse(localStorage.getItem("session-token")!);
+		const userInfo = JSON.parse(tokenToParse);
 		return { userId: userInfo.userId, username: userInfo.username };
 	} else {
 		return undefined;

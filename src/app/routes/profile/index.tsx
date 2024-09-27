@@ -15,7 +15,7 @@ const ProfilePage = () => {
 			navigate("/");
 		}
 	}, [loggedIn, navigate]);
-	if (error) {
+	if (error && !loading) {
 		return <div>Something went wrong.</div>;
 	}
 	return (

@@ -1,5 +1,5 @@
 import { isSuccessType } from "@/types/api/fetch";
-import { isLoggedIn } from "@/utils/auth";
+import { headersWithToken, isLoggedIn } from "@/utils/auth";
 import fetchWrapper from "@/utils/fetch-wrapper";
 import { isStatusOk } from "@/utils/is-status-ok";
 import { ActionFunction } from "react-router-dom";
@@ -7,6 +7,25 @@ import { ActionFunction } from "react-router-dom";
 type Headers = {
 	Authorization?: string;
 	"Content-Type": string;
+};
+
+export const editPost: ActionFunction = async ({ request, params }) => {
+	console.log(request.method);
+	if (request.method === "PUT") {
+		const { postId } = params;
+		const formData = await request.formData();
+		const content = formData.get("content");
+		const body = { content };
+		const headers = headersWithToken();
+		const response = await fetchWrapper(
+			`/posts/${postId}`,
+			body,
+			headers,
+			"PUT"
+		);
+		return response.data;
+	}
+	return null; // eslint-disable-line unicorn/no-null
 };
 
 export const addComment: ActionFunction = async ({ request, params }) => {
@@ -56,9 +75,15 @@ export const login: ActionFunction<{ token: string }> = async ({ request }) => {
 		const expiresAt = currentDate.setTime(
 			currentDate.getTime() + 60 * 60 * 1000
 		);
+
 		localStorage.setItem(
 			"session-token",
-			JSON.stringify({ token: response.data.token, expiresAt })
+			JSON.stringify({
+				token: response.data.token,
+				expiresAt,
+				username: response.data.username,
+				userId: response.data.userId,
+			})
 		);
 		return { ok: true };
 	} else {
