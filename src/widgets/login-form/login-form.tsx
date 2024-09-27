@@ -47,6 +47,7 @@ const LoginForm = () => {
 							</label>
 							<input
 								id="username"
+								autoComplete="username"
 								className=" block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 "
 								name="username"
 								placeholder="Enter username..."
