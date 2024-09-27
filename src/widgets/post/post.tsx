@@ -1,6 +1,7 @@
 import { getIdAndUsername } from "@/utils/auth";
 import { dateFormatter } from "@/utils/date-formatter";
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useFetcher } from "react-router-dom";
 
 interface Props {
@@ -20,6 +21,8 @@ const Post: FunctionComponent<Props> = ({
 }) => {
 	const [editMode, setEditMode] = useState(false);
 	const fetcher = useFetcher({ key: "edit-post" });
+	const dialogRef = useRef<HTMLDialogElement | null>(null);
+
 	const userInfo = getIdAndUsername();
 	const optimisticContent =
 		(fetcher.formData?.get("content") as string) ||
@@ -35,6 +38,13 @@ const Post: FunctionComponent<Props> = ({
 	};
 	const handleSubmitForm = () => {
 		setEditMode(false);
+	};
+
+	const handleDeleteClick = () => {
+		dialogRef?.current?.showModal();
+	};
+	const handleModalCancelClick = () => {
+		dialogRef?.current?.close();
 	};
 	return (
 		<>
@@ -54,9 +64,42 @@ const Post: FunctionComponent<Props> = ({
 						>
 							Edit
 						</button>
-						<button className="ml-4 w-24 items-center rounded-lg bg-red-500 px-4 py-2.5 text-center text-xs font-medium text-black  hover:bg-red-600 focus:ring-1 focus:ring-yellow-400">
+						<button
+							className="ml-4 w-24 items-center rounded-lg bg-red-500 px-4 py-2.5 text-center text-xs font-medium text-black  hover:bg-red-600 focus:ring-1 focus:ring-yellow-400"
+							onClick={handleDeleteClick}
+						>
 							Delete
 						</button>
+						{createPortal(
+							<dialog
+								aria-label="Delete post action confirmation"
+								className="h-64 w-96 flex-col items-center justify-start gap-4 p-8 open:flex"
+								ref={dialogRef}
+								role="alertdialog"
+							>
+								<h2 className="text-lg font-semibold">Warning!</h2>
+								<p className="">
+									This action will delete post <strong>permanently</strong>.
+								</p>
+								<p>Proceed?</p>
+								<div className="mt-4 flex gap-4">
+									<button
+										className="w-32 items-center rounded-lg bg-red-500 px-4 py-2.5 text-center text-xs font-medium text-black  hover:bg-red-600 focus:ring-1 focus:ring-yellow-400"
+										type="submit"
+									>
+										Delete
+									</button>
+									<button
+										className="w-32 items-center rounded-lg bg-yellow-300 px-4 py-2.5 text-center text-xs font-medium text-black  hover:bg-yellow-400 focus:ring-1 focus:ring-yellow-400"
+										onClick={handleModalCancelClick}
+										type="button"
+									>
+										Cancel
+									</button>
+								</div>
+							</dialog>,
+							document.body
+						)}
 					</div>
 				)}
 			</div>
