@@ -2,6 +2,8 @@
 
 A front end for the [Blog API](https://github.com/kiknalex/Blog-API) project.
 
+Design according to this [Figma](https://www.figma.com/community/file/895225371918055740).
+
 ## Credentials for demo
 
 | Username      | Password |
