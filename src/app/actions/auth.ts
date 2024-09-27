@@ -1,60 +1,7 @@
 import { isSuccessType } from "@/types/api/fetch";
-import { headersWithToken, isLoggedIn } from "@/utils/auth";
 import fetchWrapper from "@/utils/fetch-wrapper";
 import { isStatusOk } from "@/utils/is-status-ok";
 import { ActionFunction } from "react-router-dom";
-
-type Headers = {
-	Authorization?: string;
-	"Content-Type": string;
-};
-
-export const editPost: ActionFunction = async ({ request, params }) => {
-	console.log(request.method);
-	if (request.method === "PUT") {
-		const { postId } = params;
-		const formData = await request.formData();
-		const content = formData.get("content");
-		const body = { content };
-		const headers = headersWithToken();
-		const response = await fetchWrapper(
-			`/posts/${postId}`,
-			body,
-			headers,
-			"PUT"
-		);
-		return response.data;
-	}
-	return null; // eslint-disable-line unicorn/no-null
-};
-
-export const addComment: ActionFunction = async ({ request, params }) => {
-	if (request.method === "POST") {
-		const { postId } = params;
-		const formData = await request.formData();
-		const content = formData.get("content");
-		const body = { content };
-		const anon = isLoggedIn() ? "" : "?anon=true";
-		let headers: Headers = {
-			"Content-Type": "application/json",
-		};
-		if (isLoggedIn()) {
-			const token = JSON.parse(localStorage.getItem("session-token")!);
-			headers = {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${token.token}`,
-			};
-		}
-
-		const data = await fetchWrapper(
-			`/posts/${postId}/comments${anon}`,
-			body,
-			headers,
-			"post"
-		);
-		return data;
-	}
-};
 
 export const login: ActionFunction<{ token: string }> = async ({ request }) => {
 	if (request.method !== "POST") {
@@ -74,6 +21,12 @@ export const login: ActionFunction<{ token: string }> = async ({ request }) => {
 		const currentDate = new Date();
 		const expiresAt = currentDate.setTime(
 			currentDate.getTime() + 60 * 60 * 1000
+		);
+		setTimeout(
+			() => {
+				localStorage.removeItem("session-token");
+			},
+			60 * 60 * 1000
 		);
 
 		localStorage.setItem(

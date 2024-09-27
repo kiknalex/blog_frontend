@@ -11,7 +11,7 @@ const AddComment = () => {
 		}
 	}, [fetcher.state]);
 	return (
-		<fetcher.Form method="post" ref={formRef}>
+		<fetcher.Form action="comments" method="post" ref={formRef}>
 			<div className="flex flex-col gap-2">
 				<label className="sr-only" htmlFor="comment-content">
 					Your comment

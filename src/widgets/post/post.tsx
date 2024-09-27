@@ -2,7 +2,7 @@ import { getIdAndUsername } from "@/utils/auth";
 import { dateFormatter } from "@/utils/date-formatter";
 import { FunctionComponent, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { useFetcher } from "react-router-dom";
+import { Form, useFetcher } from "react-router-dom";
 
 interface Props {
 	author: string;
@@ -84,18 +84,20 @@ const Post: FunctionComponent<Props> = ({
 								<p>Proceed?</p>
 								<div className="mt-4 flex gap-4">
 									<button
-										className="w-32 items-center rounded-lg bg-red-500 px-4 py-2.5 text-center text-xs font-medium text-black  hover:bg-red-600 focus:ring-1 focus:ring-yellow-400"
-										type="submit"
-									>
-										Delete
-									</button>
-									<button
 										className="w-32 items-center rounded-lg bg-yellow-300 px-4 py-2.5 text-center text-xs font-medium text-black  hover:bg-yellow-400 focus:ring-1 focus:ring-yellow-400"
 										onClick={handleModalCancelClick}
 										type="button"
 									>
 										Cancel
 									</button>
+									<Form action="delete" method="DELETE">
+										<button
+											className="w-32 items-center rounded-lg bg-red-500 px-4 py-2.5 text-center text-xs font-medium text-black  hover:bg-red-600 focus:ring-1 focus:ring-yellow-400"
+											type="submit"
+										>
+											Delete
+										</button>
+									</Form>
 								</div>
 							</dialog>,
 							document.body

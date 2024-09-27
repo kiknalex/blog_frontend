@@ -35,3 +35,8 @@ export type ValidationErrorType = {
 	field: string;
 	message: string;
 };
+
+export type Headers = {
+	Authorization?: string;
+	"Content-Type": string;
+};
