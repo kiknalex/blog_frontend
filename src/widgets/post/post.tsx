@@ -48,7 +48,9 @@ const Post: FunctionComponent<Props> = ({
 	};
 	return (
 		<>
-			<h1 className="text-5xl font-bold text-gray-800">{title}</h1>
+			<h1 className=" text-2xl font-bold text-gray-800 md:text-3xl lg:text-5xl">
+				{title}
+			</h1>
 			<div className="mt-4 flex items-center justify-between gap-4">
 				<div>
 					<address className="font-semibold not-italic">
@@ -57,7 +59,7 @@ const Post: FunctionComponent<Props> = ({
 					<time dateTime={date}>{dateFormatter.format(new Date(date))}</time>
 				</div>
 				{isUserAuthor && (
-					<div>
+					<div className="flex flex-col md:flex-row">
 						<button
 							className="w-24 items-center rounded-lg bg-yellow-300 px-4 py-2.5 text-center text-xs font-medium text-black  hover:bg-yellow-400 focus:ring-1 focus:ring-yellow-400"
 							onClick={handleEditClick}
@@ -65,7 +67,7 @@ const Post: FunctionComponent<Props> = ({
 							Edit
 						</button>
 						<button
-							className="ml-4 w-24 items-center rounded-lg bg-red-500 px-4 py-2.5 text-center text-xs font-medium text-black  hover:bg-red-600 focus:ring-1 focus:ring-yellow-400"
+							className="mt-1 w-24 items-center rounded-lg bg-red-500 px-4 py-2.5 text-center text-xs font-medium text-black hover:bg-red-600  focus:ring-1 focus:ring-yellow-400 md:ml-4"
 							onClick={handleDeleteClick}
 						>
 							Delete
@@ -82,9 +84,9 @@ const Post: FunctionComponent<Props> = ({
 									This action will delete post <strong>permanently</strong>.
 								</p>
 								<p>Proceed?</p>
-								<div className="mt-4 flex gap-4">
+								<div className="flex gap-4 md:mt-4">
 									<button
-										className="w-32 items-center rounded-lg bg-yellow-300 px-4 py-2.5 text-center text-xs font-medium text-black  hover:bg-yellow-400 focus:ring-1 focus:ring-yellow-400"
+										className="items-center rounded-lg bg-yellow-300 px-4 py-2.5 text-center text-xs font-medium text-black hover:bg-yellow-400  focus:ring-1 focus:ring-yellow-400 md:w-32"
 										onClick={handleModalCancelClick}
 										type="button"
 									>
@@ -92,7 +94,7 @@ const Post: FunctionComponent<Props> = ({
 									</button>
 									<Form action="delete" method="DELETE">
 										<button
-											className="w-32 items-center rounded-lg bg-red-500 px-4 py-2.5 text-center text-xs font-medium text-black  hover:bg-red-600 focus:ring-1 focus:ring-yellow-400"
+											className="items-center rounded-lg bg-red-500 px-4 py-2.5 text-center text-xs font-medium text-black hover:bg-red-600  focus:ring-1 focus:ring-yellow-400 md:w-32"
 											type="submit"
 										>
 											Delete
