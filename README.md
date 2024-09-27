@@ -2,6 +2,14 @@
 
 A front end for the [Blog API](https://github.com/kiknalex/Blog-API) project.
 
+## Credentials for demo
+
+| Username      | Password |
+| ------------- | -------- |
+| testuser      | 12345678 |
+| Erica46       | 12345678 |
+| Mohamed_Stehr | 12345678 |
+
 ## Tech Stack
 
 - React
