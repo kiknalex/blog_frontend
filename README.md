@@ -21,6 +21,7 @@ Design according to this [Figma](https://www.figma.com/community/file/8952253719
 
 ## Features
 
+- Authorization
 - JWT Authentication
 - CRUD (Create, Read, Update, Delete) operations for posts.
 - Anonymous or authenticated comments creation operations.
