@@ -33,7 +33,7 @@ Design according to this [Figma](https://www.figma.com/community/file/8952253719
 
 ### Warning: API is unavailable for not whitelisted IPs, thus you will not have access to API data and app will not work properly.
 
-1. Clone the repository to your local machine: git clone https://github.com/kiknalex/blog_frontend
+1. Clone the repository to your local machine: git clone https://github.com/kiknalex/blog_frontend.git
 2. Navigate to the project directory: cd blog
 3. Install the required dependencies: npm install
 4. Start the development server: npm run dev
