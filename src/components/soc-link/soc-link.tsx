@@ -15,6 +15,7 @@ const SocLink: FunctionComponent<Props> = ({ className, socMedia, url }) => {
 		);
 	return (
 		<a
+			aria-label={socMedia}
 			className="inline-block"
 			href={url}
 			rel="noopener noreferrer"
