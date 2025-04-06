@@ -55,7 +55,7 @@ const PostsList = () => {
 	}, []);
 	return (
 		<section className="container mb-4 mt-12 ">
-			<div className="grid grid-rows-none gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+			<div className="block grid-rows-none gap-4 sm:grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
 				{posts?.posts ? (
 					posts.posts.map((post) => {
 						return (
